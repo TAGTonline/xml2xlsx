@@ -66,6 +66,8 @@ html_form = """
 def upload_convert():
     if request.method == "POST":
         file = request.files["xmlfile"]
+        original_filename = file.filename.rsplit(".", 1)[0]  # bỏ phần đuôi .xml nếu có
+
         tree = etree.parse(file)
         root = tree.getroot()
 
@@ -91,7 +93,11 @@ def upload_convert():
         wb.save(output)
         output.seek(0)
 
-        return send_file(output, download_name="converted.xlsx", as_attachment=True)
+        # Tạo tên file mới
+        converted_filename = f"{original_filename}_converted.xlsx"
+
+        return send_file(output, download_name=converted_filename, as_attachment=True)
+
 
     return render_template_string(html_form)
 
