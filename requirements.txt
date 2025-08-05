@@ -1,7 +1,4 @@
-
-flask>=3.0.0
-lxml>=4.9.0
-xlwt>=1.3.0
+# Cập nhật Thư viện cho chức năng xuất file XLSX 
 flask
 lxml
-xlwt
+openpyxl
